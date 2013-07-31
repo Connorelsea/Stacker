@@ -27,6 +27,8 @@ public class GridRow {
 	
 	private int NEXT_LENGTH;
 	
+	private boolean PAUSED;
+	
 	/*
 	 *  INITIATION AND CONSTRUCTOR
 	 */
@@ -35,8 +37,10 @@ public class GridRow {
 		
 		GRID_MANAGER = gridManager;
 		SPEED = speed;
-		SQUARES = new ArrayList<GridSquare>();
 		SEL_LENGTH = selectionLength;
+		PAUSED = false;
+		
+		SQUARES = new ArrayList<GridSquare>();
 		
 		genSquares();
 		initSelection();
@@ -64,12 +68,23 @@ public class GridRow {
 		TIMER.start();
 	}
 	
+	public void pause() {
+		PAUSED = true;
+	}
+	
+	public void resume() {
+		PAUSED = false;
+	}
+	
 	public void genTimer() {
 		
 		TIMER_ACTION = new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				move();
-				ITERATIONS++;
+				
+				if (PAUSED == false) {
+					move();
+					ITERATIONS++;
+				}
 			}
 		};
 		TIMER = new Timer(SPEED, TIMER_ACTION);
@@ -100,10 +115,6 @@ public class GridRow {
 				a_prev[i] = prev.getSquares().get(i).getLitValue();
 				a_this[i] = this.getSquares().get(i).getLitValue();
 			}
-			
-			/*
-			 *  DO THE MATH TO SEE IF THE BLOCKS ONTOP OF DA' OTHER BLOCKS MATCH EACH OTHER.
-			 */
 			
 			for (int i = 0; i !=10; i++) {
 				
@@ -200,5 +211,9 @@ public class GridRow {
 	public int getNextLength() {
 		return NEXT_LENGTH;
 	}
-
+	
+	public boolean isPaused() {
+		return PAUSED;
+	}
+	
 }

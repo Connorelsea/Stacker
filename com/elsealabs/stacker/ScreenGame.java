@@ -46,6 +46,7 @@ public class ScreenGame extends ScreenObject {
 	
 	private KeyListener KEY_LISTENER_SPACE;
 	private KeyListener KEY_LISTENER_ESCAPE;
+	private KeyListener KEY_LISTENER_P;
 	
 	private int MODE;
 	private int MODE_STEPS = 0;
@@ -255,6 +256,11 @@ public class ScreenGame extends ScreenObject {
         	
         }
         
+        if (KEY_LISTENER_P.isKeyPressed()) {
+        	if (GRID_MANAGER.isPaused()) GRID_MANAGER.resume();
+        	else GRID_MANAGER.pause();
+        }
+        
         BATCH.end();
 	}
 	
@@ -264,6 +270,7 @@ public class ScreenGame extends ScreenObject {
 	public static final int LIGHT_RED = 4;
 	
 	public void flashLights(int color, int amount) {
+		
 		Sprite toUse = null;
 		if (color == LIGHT_GREEN) toUse = S_LIGHTS_GREEN;
 		if (color == LIGHT_RED) toUse = S_LIGHTS_RED;
@@ -276,7 +283,6 @@ public class ScreenGame extends ScreenObject {
 			.target(1)
 			.repeatYoyo(amount + 1, 0)
 			.start(TWEEN_MANAGER);
-		
 	}
 	
 
@@ -288,33 +294,14 @@ public class ScreenGame extends ScreenObject {
 	@Override
 	public void show() {
 		
-		System.out.println("SHOW");
-		
 		MODE = MODE_OFF;
-		
-		TWEEN_MANAGER = new TweenManager();
-		Tween.registerAccessor(Sprite.class, new TweenAccessorSprite());
-		
 		BATCH = new SpriteBatch();
-		S_BG_OFF = new Sprite(new Texture("textures/BACKGROUND_OFF.png"));
-		S_BG_GREY = new Sprite(new Texture("textures/BACKGROUND_GREY.png"));
-		S_BG_BLUE = new Sprite(new Texture("textures/BACKGROUND_BLUE.png"));
-		S_BG_GREEN = new Sprite(new Texture("textures/BACKGROUND_GREEN.png"));
-		S_BG_RED = new Sprite(new Texture("textures/BACKGROUND_RED.png"));
-		S_MACHINE = new Sprite(new Texture("textures/ARCADE_MACHINE.png"));
-		S_MACHINE_OFF = new Sprite(new Texture("textures/ARCADE_MACHINE_OFF.png"));
-		S_GRID_FULL = new Sprite(new Texture("textures/GRID_FULL.png"));
-		S_LOGO_STACKER_ON = new Sprite(new Texture("textures/LOGO_STACKER_ON.png"));
-		S_LOGO_STACKER_OFF = new Sprite(new Texture("textures/LOGO_STACKER_OFF.png"));
-		S_LIGHTS_BLUE = new Sprite(new Texture("textures/LIGHTS_BLUE.png"));
-		S_LIGHTS_GREEN = new Sprite(new Texture("textures/LIGHTS_GREEN.png"));
-		S_LIGHTS_RED = new Sprite(new Texture("textures/LIGHTS_RED.png"));
-		S_LIGHTS_WHITE = new Sprite(new Texture("textures/LIGHTS_WHITE.png"));
+		
+		initSprites();
+		initKeyListeners();
+		initTweens();
 		
 		GRID_MANAGER = new GridManager(BATCH, this, TWEEN_MANAGER);
-		
-		KEY_LISTENER_SPACE = new KeyListener(Input.Keys.SPACE, 300);
-		KEY_LISTENER_ESCAPE = new KeyListener(Input.Keys.ESCAPE, 300);
 		
 	}
 
@@ -336,6 +323,38 @@ public class ScreenGame extends ScreenObject {
 	@Override
 	public void dispose() {
 		
+	}
+	
+	/*
+	 *  INITIATION METHODS
+	 */
+	
+	public void initSprites() {
+		S_BG_OFF = new Sprite(new Texture("textures/BACKGROUND_OFF.png"));
+		S_BG_GREY = new Sprite(new Texture("textures/BACKGROUND_GREY.png"));
+		S_BG_BLUE = new Sprite(new Texture("textures/BACKGROUND_BLUE.png"));
+		S_BG_GREEN = new Sprite(new Texture("textures/BACKGROUND_GREEN.png"));
+		S_BG_RED = new Sprite(new Texture("textures/BACKGROUND_RED.png"));
+		S_MACHINE = new Sprite(new Texture("textures/ARCADE_MACHINE.png"));
+		S_MACHINE_OFF = new Sprite(new Texture("textures/ARCADE_MACHINE_OFF.png"));
+		S_GRID_FULL = new Sprite(new Texture("textures/GRID_FULL.png"));
+		S_LOGO_STACKER_ON = new Sprite(new Texture("textures/LOGO_STACKER_ON.png"));
+		S_LOGO_STACKER_OFF = new Sprite(new Texture("textures/LOGO_STACKER_OFF.png"));
+		S_LIGHTS_BLUE = new Sprite(new Texture("textures/LIGHTS_BLUE.png"));
+		S_LIGHTS_GREEN = new Sprite(new Texture("textures/LIGHTS_GREEN.png"));
+		S_LIGHTS_RED = new Sprite(new Texture("textures/LIGHTS_RED.png"));
+		S_LIGHTS_WHITE = new Sprite(new Texture("textures/LIGHTS_WHITE.png"));
+	}
+	
+	public void initKeyListeners() {
+		KEY_LISTENER_SPACE = new KeyListener(Input.Keys.SPACE, 300);
+		KEY_LISTENER_ESCAPE = new KeyListener(Input.Keys.ESCAPE, 300);
+		KEY_LISTENER_P = new KeyListener(Input.Keys.P, 300);
+	}
+	
+	public void initTweens() {
+		TWEEN_MANAGER = new TweenManager();
+		Tween.registerAccessor(Sprite.class, new TweenAccessorSprite());
 	}
 
 }

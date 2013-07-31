@@ -32,14 +32,24 @@ public class GridManager {
 	 */
 	
 	public GridManager(SpriteBatch batch, ScreenGame sg, TweenManager tm) {
-		DIFFICULTY = GridManager.NORMAL;
+		
 		BATCH = batch;
 		SCREEN_GAME = sg;
 		TWEEN_MANAGER = tm;
-		SCORE_MANAGER = new ScoreManager();
-		ROWS = new ArrayList<GridRow>();
+		
+		initVariables();
 		initRendering();
 	}
+	
+	public void initVariables() {
+		DIFFICULTY = GridManager.NORMAL;
+		SCORE_MANAGER = new ScoreManager();
+		ROWS = new ArrayList<GridRow>();
+	}
+	
+	/*
+	 *  TIME HANDLING, PAUSING, RESUMING, ETC
+	 */
 	
 	public void start() {
 		
@@ -53,6 +63,18 @@ public class GridManager {
 		System.out.println("}");
 		
 		iteration();
+	}
+	
+	public void pause() {
+		getCurrentRow().pause();
+	}
+	
+	public void resume() {
+		getCurrentRow().resume();
+	}
+	
+	public boolean isPaused() {
+		return getCurrentRow().isPaused();
 	}
 	
 	/*
@@ -127,18 +149,22 @@ public class GridManager {
 	
 	public void doStack() {
 		
-		if (getCurrentRow().doStack() == true) {
+		if (isPaused() == false) {
 			
-			SCREEN_GAME.flashLights(SCREEN_GAME.LIGHT_GREEN, 2);
-			createNextRow();
-			
-		} else {
-			
-			SCREEN_GAME.flashLights(SCREEN_GAME.LIGHT_RED, 2);
-			reset();
+			if (getCurrentRow().doStack() == true) {
+				SCREEN_GAME.flashLights(SCREEN_GAME.LIGHT_GREEN, 2);
+				createNextRow();
+			} else {
+				SCREEN_GAME.flashLights(SCREEN_GAME.LIGHT_RED, 2);
+				reset();
+			}
 		}
 		
 	}
+	
+	/*
+	 *  GAME WINNING
+	 */
 	
 	public void doWin() {
 		System.out.println("[Won Game]");
