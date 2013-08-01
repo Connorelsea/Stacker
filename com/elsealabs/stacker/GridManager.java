@@ -62,7 +62,7 @@ public class GridManager {
 		System.out.println("	Time Multiplier: " + DIFFICULTY);
 		System.out.println("}");
 		
-		iteration();
+		createNextRow();
 	}
 	
 	public void pause() {
@@ -104,10 +104,6 @@ public class GridManager {
 	/*
 	 *  STACK AND ROW HANDLING
 	 */
-	
-	public void iteration() {
-		createNextRow();
-	}
 	
 	public void createNextRow() {
 		

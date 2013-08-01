@@ -253,7 +253,7 @@ public class ScreenGame extends ScreenObject {
         }
         
         if (KEY_LISTENER_ESCAPE.isKeyPressed()) {
-        	
+        	// TODO menu
         }
         
         if (KEY_LISTENER_P.isKeyPressed()) {
@@ -288,7 +288,7 @@ public class ScreenGame extends ScreenObject {
 
 	@Override
 	public void resize(int width, int height) {
-		
+		// TODO Dynamic scaling.
 	}
 
 	@Override
@@ -302,7 +302,6 @@ public class ScreenGame extends ScreenObject {
 		initTweens();
 		
 		GRID_MANAGER = new GridManager(BATCH, this, TWEEN_MANAGER);
-		
 	}
 
 	@Override
@@ -321,9 +320,7 @@ public class ScreenGame extends ScreenObject {
 	}
 
 	@Override
-	public void dispose() {
-		
-	}
+	public void dispose() { }
 	
 	/*
 	 *  INITIATION METHODS
