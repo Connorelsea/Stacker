@@ -3,7 +3,10 @@
 TODO Since 0.1.0
 
 * # Pause/Resume feature
-* Music
+* Managed Render System
+* Block falling animation
+* Winning screen
+* Music (By Bossfight)
 * Statistics management and saving
 * Menu, Level
 * Menu, Statistics
