@@ -219,7 +219,7 @@ public class ScreenGame extends ScreenObject {
                 S_LOGO_STACKER_ON.draw(BATCH);
                 S_LIGHTS_BLUE.draw(BATCH);
                 
-                GRID_MANAGER.setDifficulty(GridManager.HARD);
+                GRID_MANAGER.setDifficulty(GridManager.NORMAL);
                 GRID_MANAGER.start();
                 
                 MODE_STEPS = 2;
