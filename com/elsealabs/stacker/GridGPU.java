@@ -40,8 +40,6 @@ public class GridGPU {
 		DYNAMIC_COORD_ARRAYS = new ArrayList<ArrayList<GridCoordinate>>();
 		A_FALLING = new ArrayList<AnimationFalling>();
 		loadSprites();
-		
-		Tween.registerAccessor(GridCoordinate.class, new TweenAccessorGC());
 	}
 	
 	public void loadSprites() {

@@ -39,8 +39,6 @@ public class AnimationFalling {
 		ACTION_FALLING = new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				System.out.println("Falling");
-				
 				for (GridCoordinate gc : FALLING_COORDS) {
 					gc.setY(gc.getY() - 1);
 				}
