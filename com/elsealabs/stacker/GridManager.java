@@ -22,9 +22,9 @@ public class GridManager {
 	private ScoreManager SCORE_MANAGER;
 	
 	private int DIFFICULTY;
-	public static final int EASY = 8;
-	public static final int NORMAL = 11;
-	public static final int HARD = 12;
+	public static final int EASY = 11;
+	public static final int NORMAL = 12;
+	public static final int HARD = 13;
 	public static final int EXTREME = 14;
 	
 	/*
