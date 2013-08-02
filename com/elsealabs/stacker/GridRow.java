@@ -101,11 +101,21 @@ public class GridRow {
 		
 	}
 	
+	private int TO_FALL;
+	
 	public boolean determineBlockMatching() {
 		
 		if (GRID_MANAGER.getRowCount() > 1) {
 			
 			NEXT_LENGTH = 0;
+			
+			TO_FALL = 3;
+			if (GRID_MANAGER.getRowCount() > 3) TO_FALL = 3;
+			if (GRID_MANAGER.getRowCount() == 3) TO_FALL = 2;
+			if (GRID_MANAGER.getRowCount() == 2) TO_FALL = 1;
+			if (GRID_MANAGER.getRowCount() < 2) TO_FALL = 0;
+			
+			AnimationFalling af = new AnimationFalling(GRID_MANAGER.getGPU(), TO_FALL);
 			
 			GridRow prev = GRID_MANAGER.getRows().get(GRID_MANAGER.getRows().size() - 2);
 			int[] a_prev = new int[10];
@@ -123,11 +133,14 @@ public class GridRow {
 					lightSquare(i, true);
 				}
 				if (a_this[i] == 1 && a_prev[i] == 0) {
+					
 					lightSquare(i, false);
-					GRID_MANAGER.getGPU().animateFalling(new GridCoordinate(i, GRID_MANAGER.getRowCount() - 1));
+					af.addFallingCoord(new GridCoordinate(i, GRID_MANAGER.getRowCount() - 1));
 				}
 
 			}
+			
+			if (af.isFalling()) af.animateFalling();
 			
 			this.SEL_LENGTH = NEXT_LENGTH;
 			if (NEXT_LENGTH > 0) return true; else return false;

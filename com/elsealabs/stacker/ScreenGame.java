@@ -241,7 +241,7 @@ public class ScreenGame extends ScreenObject {
                 S_LIGHTS_GREEN.draw(BATCH);
                 S_LIGHTS_RED.draw(BATCH);
                 
-                GRID_MANAGER.render();
+                GRID_MANAGER.render(delta);
         	}
         	
         }

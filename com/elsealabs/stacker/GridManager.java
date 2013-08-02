@@ -175,7 +175,7 @@ public class GridManager {
 		GRID_GPU = new GridGPU(BATCH, this);
 	}
 	
-	public void render() {
+	public void render(float delta) {
 		GRID_GPU.clearCoords();
 		int c = -1;
 		int a[] = new int[10];
@@ -188,7 +188,7 @@ public class GridManager {
 			}
 		}
 		
-		GRID_GPU.render();
+		GRID_GPU.render(delta);
 	}
 	
 	/*
